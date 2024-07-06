@@ -12,7 +12,7 @@
   "dependencies": {
     "@vuepic/vue-datepicker": "^8.8.1",
     "pinia": "^2.1.7",
-    "powerful-select": "^0.1.0",
+    "powerful-select": "file:../Vite/publish/powerful-select",
     "sass": "^1.77.6",
     "vue": "^3.4.29",
     "vue-router": "^4.3.3"
