@@ -1,1 +1,19 @@
 @import './base.css';
+
+.powerful-select-wrap {
+	position: relative;
+	display: inline-block;
+	> ul {
+		background-color: aliceblue;
+		list-style-type: none;
+		margin: 0;
+		padding: 0;
+		width: 100%;
+		> li {
+			padding: 4px;
+			&:hover {
+				background-color: aqua;
+			}
+		}
+	}
+}
