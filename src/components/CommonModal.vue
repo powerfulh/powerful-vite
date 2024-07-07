@@ -1,6 +1,6 @@
 <script setup>
 import { onMounted, ref } from 'vue'
-import ModalUtil from './ModalUtil.vue'
+import ModalUtil from './core/ModalUtil.vue'
 
 defineProps({
 	title: String,

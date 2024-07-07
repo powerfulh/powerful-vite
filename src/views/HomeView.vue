@@ -1,7 +1,5 @@
 <script setup>
 import { reactive, ref } from 'vue'
-import CS from '@/components/CommonSelect.vue'
-import CM from '@/components/CommonModal.vue'
 
 const testList = reactive([
 	{
