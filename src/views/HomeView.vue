@@ -27,8 +27,31 @@ const testList1 = reactive([
 		text: 'c',
 	},
 ])
+const testList2 = reactive([
+	{
+		code: 1,
+		text: 'aa',
+	},
+	{
+		code: 2,
+		text: 'bb',
+	},
+	{
+		code: 3,
+		text: 'cc',
+	},
+	{
+		code: 4,
+		text: 'def',
+	},
+	{
+		code: 5,
+		text: 'ee',
+	},
+])
 const selVal = ref('')
 const selVal1 = ref('')
+const selVal2 = ref('')
 const modal = ref(false)
 </script>
 
@@ -46,7 +69,13 @@ const modal = ref(false)
 		<button @click="modal = true">Open modal</button>
 
 		<c-m v-if="modal" title="Test title" @close="modal = false">
-			<div class="modal-content">I am modal content</div>
+			<div class="modal-content">
+				I am modal content
+				<br />
+				<c-s v-model="selVal2" :list="testList2" auto></c-s>
+				<br />
+				<input type="text" placeholder="Other input1" />
+			</div>
 		</c-m>
 	</main>
 </template>
