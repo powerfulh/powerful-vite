@@ -30,4 +30,13 @@ module.exports = {
 		'no-debugger': 'error',
 		'no-alert': 'warn',
 	},
+	overrides: [
+		{
+			files: ['*.ts'],
+			rules: {
+				// TS ESLint 공문에 따르면 타입스크립트에서 잘 찾으니 ESLint가 찾게 하지 마라
+				'no-undef': 'off',
+			},
+		},
+	],
 }

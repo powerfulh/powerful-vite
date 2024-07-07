@@ -1,38 +1,19 @@
 import { RouteRecordRaw } from 'vue-router'
-import admin from './admin'
-import company from './company'
-import item from './item'
-import mileup from './mileup'
-import mileuse from './mileuse'
-import partner from './partner'
-import person from './person'
-import star from './star'
-import statistic from './statistic'
+import menu0 from './menu0'
 
 const list: Array<routeItem | routeMenu> = [
+	//{
+	//	path: '/login',
+	//	component: () => import('@/views/group/main/AcLogin.vue'),
+	//	name: 'Login',
+	//	meta: {
+	//		login: true,
+	//	},
+	//},
 	{
-		path: '/',
-		// redirect: '/login',
-		redirect: '/nac/view/person/manage/Member_DetailInfo',
-		name: 'Base url',
-	},
-	{
-		path: '/login',
-		component: () => import('@/views/group/main/AcLogin.vue'),
-		name: 'Login',
-		meta: {
-			login: true,
-		},
-	},
-	{
-		path: '/bg',
-		component: () => import('@/views/common/BackGround.vue'),
-		name: 'BackGround',
-	},
-	{
-		path: '/nac/view',
-		name: 'nac-view',
-		sub: [admin, company, item, mileup, mileuse, partner, person, star, statistic],
+		path: '/common-root',
+		name: 'CommonRoot',
+		sub: [menu0],
 	},
 ]
 
