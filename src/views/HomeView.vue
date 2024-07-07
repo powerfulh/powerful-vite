@@ -52,8 +52,14 @@ const testList2 = reactive([
 const selVal = ref('')
 const selVal1 = ref('')
 const selVal2 = ref('')
+const confirmVal = ref(0)
 const modal = ref(false)
 const alertModal = ref(false)
+const confirmModal = ref(false)
+
+function whenConfirm() {
+	confirmVal.value++
+}
 </script>
 
 <template>
@@ -69,6 +75,9 @@ const alertModal = ref(false)
 		<br />
 		<button @click="modal = true">Open modal</button>
 		<button @click="alertModal = true">Open alert</button>
+		<br />
+		<button @click="confirmModal = true">Open Confirm</button>
+		Confirm val: {{ confirmVal }}
 
 		<c-m v-if="modal" title="Test title" @close="modal = false">
 			<div class="modal-content">
@@ -80,5 +89,6 @@ const alertModal = ref(false)
 			</div>
 		</c-m>
 		<c-m v-if="alertModal" alert="Test alert" @close="alertModal = false"></c-m>
+		<c-m v-if="confirmModal" alert="Test Confirm" :confirm="whenConfirm" @close="confirmModal = false"></c-m>
 	</main>
 </template>

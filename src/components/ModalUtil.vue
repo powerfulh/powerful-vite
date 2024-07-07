@@ -1,11 +1,18 @@
 <script setup>
 import { ref } from 'vue'
 
-defineProps({
+const prop = defineProps({
 	dialog: String,
+	confirmCallback: Function,
 })
-defineEmits(['click-close'])
+const emit = defineEmits(['click-close'])
 
+function onConfirm() {
+	prop.confirmCallback()
+	emit('click-close')
+}
+
+// After mount
 const root = ref()
 const box = ref()
 
@@ -22,7 +29,10 @@ defineExpose({
 				<slot name="title"></slot>
 				<div v-if="dialog" class="dialog">
 					<div class="msg">{{ dialog }}</div>
-					<div class="btn-wrap"><button @click="$emit('click-close')">Close</button></div>
+					<div class="btn-wrap">
+						<button v-if="confirmCallback" class="confirm" @click="onConfirm">Confirm</button>
+						<button @click="$emit('click-close')">Close</button>
+					</div>
 				</div>
 				<slot v-else />
 			</div>

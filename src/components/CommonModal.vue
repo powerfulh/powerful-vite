@@ -5,6 +5,7 @@ import ModalUtil from './ModalUtil.vue'
 defineProps({
 	title: String,
 	alert: String,
+	confirm: Function,
 })
 defineEmits(['close'])
 
@@ -21,7 +22,7 @@ onMounted(init)
 </script>
 
 <template>
-	<ModalUtil :dialog="alert" ref="mu" @click-close="$emit('close')">
+	<ModalUtil :dialog="alert" :confirm-callback="confirm" ref="mu" @click-close="$emit('close')">
 		<template v-if="title" #title>
 			<div class="title">
 				{{ title }}
