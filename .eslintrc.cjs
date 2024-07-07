@@ -6,7 +6,7 @@ module.exports = {
 		ecmaVersion: 'latest',
 		parser: '@typescript-eslint/parser',
 	},
-	plugins: ['vue', 'prettier'],
+	plugins: ['vue', 'prettier', '@typescript-eslint'],
 	rules: {
 		'prettier/prettier': [
 			'warn',
