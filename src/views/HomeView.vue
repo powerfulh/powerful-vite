@@ -53,6 +53,7 @@ const selVal = ref('')
 const selVal1 = ref('')
 const selVal2 = ref('')
 const modal = ref(false)
+const alertModal = ref(false)
 </script>
 
 <template>
@@ -67,6 +68,7 @@ const modal = ref(false)
 		selVal1: {{ selVal1 }}
 		<br />
 		<button @click="modal = true">Open modal</button>
+		<button @click="alertModal = true">Open alert</button>
 
 		<c-m v-if="modal" title="Test title" @close="modal = false">
 			<div class="modal-content">
@@ -77,5 +79,6 @@ const modal = ref(false)
 				<input type="text" placeholder="Other input1" />
 			</div>
 		</c-m>
+		<c-m v-if="alertModal" alert="Test alert" @close="alertModal = false"></c-m>
 	</main>
 </template>

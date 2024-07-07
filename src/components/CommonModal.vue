@@ -4,6 +4,7 @@ import ModalUtil from './ModalUtil.vue'
 
 defineProps({
 	title: String,
+	alert: String,
 })
 defineEmits(['close'])
 
@@ -20,7 +21,7 @@ onMounted(init)
 </script>
 
 <template>
-	<ModalUtil ref="mu">
+	<ModalUtil :dialog="alert" ref="mu" @click-close="$emit('close')">
 		<template v-if="title" #title>
 			<div class="title">
 				{{ title }}

@@ -2,8 +2,9 @@
 import { ref } from 'vue'
 
 defineProps({
-	dialog: Boolean,
+	dialog: String,
 })
+defineEmits(['click-close'])
 
 const root = ref()
 const box = ref()
@@ -19,7 +20,10 @@ defineExpose({
 		<div class="powerful-modal-wrap" ref="root">
 			<div class="powerful-modal" ref="box">
 				<slot name="title"></slot>
-				<div v-if="dialog" class="dialog"></div>
+				<div v-if="dialog" class="dialog">
+					<div class="msg">{{ dialog }}</div>
+					<div class="btn-wrap"><button @click="$emit('click-close')">Close</button></div>
+				</div>
 				<slot v-else />
 			</div>
 		</div>
