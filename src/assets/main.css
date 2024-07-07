@@ -18,3 +18,17 @@
 		}
 	}
 }
+
+.powerful-modal-wrap {
+	z-index: 100;
+	background: rgba(53, 54, 65, 0.5);
+	.powerful-modal {
+		background-color: gray;
+		padding: 8px;
+		margin: auto;
+		.title {
+			background-color: darkgray;
+			padding: 4px;
+		}
+	}
+}
