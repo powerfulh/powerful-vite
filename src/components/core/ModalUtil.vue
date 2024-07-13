@@ -15,10 +15,14 @@ function onConfirm() {
 // After mount
 const root = ref()
 const box = ref()
+const confirmBtn = ref()
+const closeBtn = ref()
 
 defineExpose({
 	root,
 	box,
+	confirmBtn,
+	closeBtn,
 })
 </script>
 
@@ -30,8 +34,8 @@ defineExpose({
 				<div v-if="dialog" class="dialog">
 					<div class="msg">{{ dialog }}</div>
 					<div class="btn-wrap">
-						<button v-if="confirmCallback" class="confirm" @click="onConfirm">Confirm</button>
-						<button @click="$emit('click-close')">Close</button>
+						<button v-if="confirmCallback" class="confirm" ref="confirmBtn" @click="onConfirm">Confirm</button>
+						<button ref="closeBtn" @click="$emit('click-close')">Close</button>
 					</div>
 				</div>
 				<slot v-else />
