@@ -1,11 +1,120 @@
 <script setup>
-import { RouterLink, RouterView } from 'vue-router'
+import { computed, isProxy, provide, reactive, toRaw } from 'vue'
+import { RouterLink, RouterView, useRoute, useRouter } from 'vue-router'
+import api from '@/util/api'
+
+const router = useRouter()
+const route = useRoute()
+
+const d = import.meta.env.MODE == 'development'
+const alertModal = reactive({
+	info: '',
+	err: '',
+	cf: '',
+	confirm: null,
+	// prompt 구현 안함
+})
+const devCommandCenter = {
+	R: () => router.replace(route.path + '_refresh'),
+}
+
+const openAlertModal = computed(() => alertModal.info || alertModal.err || alertModal.cf)
+
+function devCommand() {
+	if (d) {
+		const command = prompt() || ''
+		devCommandCenter[command.toUpperCase()]()
+	}
+}
+function initAlert() {
+	alertModal.cf = ''
+	alertModal.err = ''
+	alertModal.info = ''
+	if (alertModal.then) {
+		alertModal.then()
+		delete alertModal.then
+	}
+	alertModal.confirm = null
+}
+function getCf(msg, callback) {
+	alertModal.cf = msg
+	alertModal.confirm = callback
+	return {
+		// cf에서의 then은 뭘 누르건 실행된다.
+		then(cb) {
+			alertModal.then = cb
+		},
+	}
+}
+
+globalMode = d
+	? {
+			log: (...v) => {
+				const logList = [...v].map(item => {
+					if (isProxy(item)) return toRaw(item)
+					else return item
+				})
+				console.groupCollapsed(...logList)
+				console.trace()
+				console.groupEnd()
+			},
+			warn: (...v) => {
+				console.warn(...v)
+			},
+			err: (...v) => {
+				console.error(...v)
+				alertModal.err = v[0]
+				return {
+					then(cb) {
+						alertModal.then = cb
+					},
+				}
+			},
+			info: (...v) => {
+				globalMode.log(...v)
+				alertModal.info = v[0]
+				return {
+					then(cb) {
+						alertModal.then = cb
+					},
+				}
+			},
+			getCf,
+		}
+	: {
+			log() {},
+			warn() {},
+			err: (...v) => {
+				alertModal.err = v[0]
+				return {
+					then(cb) {
+						alertModal.then = cb
+					},
+				}
+			},
+			info: (...v) => {
+				alertModal.info = v[0]
+				return {
+					then(cb) {
+						alertModal.then = cb
+					},
+				}
+			},
+			getCf,
+		}
+provide('api', api.getLauncher())
+provide('dcc', devCommandCenter)
 </script>
 
 <template>
+	<template v-if="d">
+		<!-- @contextmenu.prevent="devCommand" -->
+		<span id="represent-dev" @click.ctrl.exact="devCommand">Now Dev</span>
+	</template>
+
 	<header>
 		<div class="wrapper">
-			<nav>
+			<nav style="text-align: center">
 				<RouterLink to="/">Home</RouterLink>
 				<RouterLink to="/common-root/menu0/test-view">Test</RouterLink>
 			</nav>
@@ -13,68 +122,17 @@ import { RouterLink, RouterView } from 'vue-router'
 	</header>
 
 	<RouterView />
+
+	<c-m v-if="openAlertModal" :alert="openAlertModal" :confirm="alertModal.confirm" @close="initAlert"></c-m>
 </template>
 
 <style scoped>
-header {
-	line-height: 1.5;
-	max-height: 100vh;
-}
-
-.logo {
-	display: block;
-	margin: 0 auto 2rem;
-}
-
-nav {
-	width: 100%;
-	font-size: 12px;
-	text-align: center;
-	margin-top: 2rem;
-}
-
-nav a.router-link-exact-active {
-	color: var(--color-text);
-}
-
-nav a.router-link-exact-active:hover {
-	background-color: transparent;
-}
-
-nav a {
-	display: inline-block;
-	padding: 0 1rem;
-	border-left: 1px solid var(--color-border);
-}
-
-nav a:first-of-type {
-	border: 0;
-}
-
-@media (min-width: 1024px) {
-	header {
-		display: flex;
-		place-items: center;
-		padding-right: calc(var(--section-gap) / 2);
-	}
-
-	.logo {
-		margin: 0 2rem 0 0;
-	}
-
-	header .wrapper {
-		display: flex;
-		place-items: flex-start;
-		flex-wrap: wrap;
-	}
-
-	nav {
-		text-align: left;
-		margin-left: -1rem;
-		font-size: 1rem;
-
-		padding: 1rem 0;
-		margin-top: 1rem;
-	}
+#represent-dev {
+	position: absolute;
+	opacity: 0.3;
+	z-index: 10001;
+	color: darkcyan;
+	background-color: aquamarine;
+	user-select: none;
 }
 </style>

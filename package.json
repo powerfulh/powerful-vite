@@ -6,12 +6,15 @@
   "scripts": {
     "dev": "vite",
     "build": "vite build",
+    "build:dev": "vite build --mode development",
     "preview": "vite preview",
     "lint": "eslint . --ext .vue,.js,.jsx,.cjs,.mjs --fix --ignore-path .gitignore"
   },
   "dependencies": {
     "@vue/eslint-config-prettier": "^9.0.0",
     "@vuepic/vue-datepicker": "^8.8.1",
+    "axios": "^1.7.2",
+    "dayjs": "^1.11.11",
     "pinia": "^2.1.7",
     "powerful-select": "^1.0.0",
     "sass": "^1.77.6",

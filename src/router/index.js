@@ -14,4 +14,9 @@ const router = createRouter({
 	],
 })
 
+router.afterEach((to, from) => {
+	// 유효하지 않은 라우트는 이전 라우트로 이동 => 동 라우트 새로 고침으로도 활용
+	if (to.name == undefined) router.replace(from.fullPath)
+})
+
 export default router
