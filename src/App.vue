@@ -1,7 +1,8 @@
 <script setup>
 import { computed, isProxy, provide, reactive, toRaw } from 'vue'
-import { RouterLink, RouterView, useRoute, useRouter } from 'vue-router'
+import { RouterView, useRoute, useRouter } from 'vue-router'
 import api from '@/util/api'
+import TopHeader from './components/app/TopHeader.vue'
 
 const router = useRouter()
 const route = useRoute()
@@ -112,14 +113,7 @@ provide('dcc', devCommandCenter)
 		<span id="represent-dev" @click.ctrl.exact="devCommand">Now Dev</span>
 	</template>
 
-	<header>
-		<div class="wrapper">
-			<nav style="text-align: center">
-				<RouterLink to="/">Home</RouterLink>
-				<RouterLink to="/common-root/menu0/test-view">Test</RouterLink>
-			</nav>
-		</div>
-	</header>
+	<TopHeader />
 
 	<RouterView />
 
