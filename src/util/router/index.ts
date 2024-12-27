@@ -2,14 +2,6 @@ import { RouteRecordRaw } from 'vue-router'
 import menu0 from './menu0'
 
 const list: Array<routeItem | routeMenu> = [
-	//{
-	//	path: '/login',
-	//	component: () => import('@/views/group/main/AcLogin.vue'),
-	//	name: 'Login',
-	//	meta: {
-	//		login: true,
-	//	},
-	//},
 	{
 		path: '/common-root',
 		name: 'CommonRoot',
