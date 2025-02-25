@@ -9,7 +9,7 @@ const r: routeMenu = {
 		{
 			path: '/alertconfirm',
 			name: 'AlertConfirm',
-			component: () => import('@/components/views/AlertConfirm.vue'),
+			component: () => import('@/components/views/menu0/AlertConfirm.vue'),
 		},
 	],
 	name: 'Menu0',
