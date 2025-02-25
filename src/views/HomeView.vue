@@ -55,8 +55,9 @@ const modal = ref(false)
 const alertModal = ref(false)
 const confirmModal = ref(false)
 
-function whenConfirm() {
-	confirmVal.value++
+function whenConfirm(c) {
+	if (c) confirmVal.value++
+	else confirmVal.value--
 }
 </script>
 

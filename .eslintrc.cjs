@@ -32,7 +32,7 @@ module.exports = {
 	},
 	overrides: [
 		{
-			files: ['*.ts'],
+			files: ['*.ts'], // lang ts 인 뷰만 골라잡기는 린트에서 지원하지 않으므로 그냥 ts 파일로 빼서 쓰는 게 낫다
 			rules: {
 				// TS ESLint 공문에 따르면 타입스크립트에서 잘 찾으니 ESLint가 찾게 하지 마라
 				'no-undef': 'off',

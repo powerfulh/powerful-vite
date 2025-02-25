@@ -1,14 +1,19 @@
-<script setup>
+<script setup lang="ts">
 import { ref } from 'vue'
+import { callback } from './i'
 
-const prop = defineProps({
-	dialog: String,
-	confirmCallback: Function,
-})
+const prop = defineProps<{
+	dialog: String
+	confirmCallback: callback
+}>()
 const emit = defineEmits(['click-close'])
 
-function onConfirm() {
-	prop.confirmCallback()
+function onConfirm(c) {
+	prop.confirmCallback(c)
+	emit('click-close')
+}
+function onClose() {
+	if (prop.confirmCallback) prop.confirmCallback(false)
 	emit('click-close')
 }
 
@@ -34,8 +39,8 @@ defineExpose({
 				<div v-if="dialog" class="dialog">
 					<div class="msg">{{ dialog }}</div>
 					<div class="btn-wrap">
-						<button v-if="confirmCallback" class="confirm" ref="confirmBtn" @click="onConfirm">Confirm</button>
-						<button ref="closeBtn" @click="$emit('click-close')">Close</button>
+						<button v-if="confirmCallback" class="confirm" ref="confirmBtn" @click="onConfirm(true)">Confirm</button>
+						<button ref="closeBtn" @click="onClose">Close</button>
 					</div>
 				</div>
 				<slot v-else />
