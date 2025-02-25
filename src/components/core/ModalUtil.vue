@@ -4,7 +4,7 @@ import { callback } from './i'
 
 const prop = defineProps<{
 	dialog: String
-	confirmCallback: callback
+	confirmCallback?: callback
 }>()
 const emit = defineEmits(['click-close'])
 
