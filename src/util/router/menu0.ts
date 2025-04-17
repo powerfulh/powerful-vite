@@ -11,6 +11,11 @@ const r: routeMenu = {
 			name: 'AlertConfirm',
 			component: () => import('@/components/views/menu0/AlertConfirm.vue'),
 		},
+		{
+			path: '/testps',
+			name: 'PowerfulSelectSample',
+			component: () => import('@/components/views/menu0/PowerfulSelect.vue'),
+		},
 	],
 	name: 'Menu0',
 }
