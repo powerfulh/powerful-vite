@@ -7,6 +7,11 @@ const list: Array<routeItem | routeMenu> = [
 		name: 'CommonRoot',
 		sub: [menu0],
 	},
+	{
+		path: '/',
+		name: 'Home',
+		redirect: '/common-root/menu0/test-view',
+	},
 ]
 
 const routes: Array<RouteRecordRaw> = []
