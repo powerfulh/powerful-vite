@@ -4,7 +4,7 @@ const r: routeMenu = {
 		{
 			name: 'TestView',
 			path: '/test-view',
-			component: () => import('@/components/views/menu0/TestView.vue'),
+			component: () => import('@/components/views/menu0/home/TestView.vue'),
 		},
 		{
 			path: '/alertconfirm',
