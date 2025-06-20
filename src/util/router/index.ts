@@ -1,11 +1,12 @@
 import { RouteRecordRaw } from 'vue-router'
 import menu0 from './menu0'
+import menu1 from './menu1'
 
 const list: Array<routeItem | routeMenu> = [
 	{
 		path: '/common-root',
 		name: 'CommonRoot',
-		sub: [menu0],
+		sub: [menu0, menu1],
 	},
 	{
 		path: '/',
