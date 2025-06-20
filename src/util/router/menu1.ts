@@ -2,8 +2,8 @@ const r: routeMenu = {
 	path: '/menu1',
 	sub: [
 		{
-			name: 'GetGrid',
-			path: '/get-grid',
+			name: 'PowerfulGridSample',
+			path: '/test-grid',
 			component: () => import('@/components/views/menu1/grid/Index.vue'),
 		},
 	],

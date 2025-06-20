@@ -4,7 +4,8 @@ import { computed } from 'vue'
 
 const props = defineProps<{
 	cols: Array<Col>
-	gridView: GridView<any>
+	gridView: GridView<{}>
+	readonly?: boolean
 }>()
 
 const table = computed(() => {
@@ -23,12 +24,13 @@ const table = computed(() => {
 		<!-- <colgroup></colgroup> -->
 		<thead>
 			<tr v-for="(item, i) in table.header" :key="i">
-				<!-- <th>상태</th> -->
+				<th v-if="readonly != true && i == 0" :rowspan="table.header.length > 1 ? table.header.length : null">상태</th>
 				<th v-for="(th, ii) in item" :key="ii">{{ th.label || th.name }}</th>
 			</tr>
 		</thead>
 		<tbody>
 			<tr v-for="(item, i) in gridView.data" :key="i">
+				<td v-if="readonly != true">{{ item._status }}</td>
 				<td v-for="(td, ii) in table.finalCols" :key="ii" :class="`col-${td.name}`">{{ item[td.name] }}</td>
 			</tr>
 		</tbody>

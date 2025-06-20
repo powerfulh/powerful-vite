@@ -18,13 +18,13 @@ export interface Table {
 	header: Array<Array<Col>>
 	finalCols: Array<Col>
 }
-interface Row<T> {
+interface Row {
 	_status: RowStat
-	_origin: T
+	_origin: number
 }
 export interface GridView<T> {
 	init: (...d: Array<T>) => void
-	data: Initializable<T>
+	data: Initializable<T & Row>
 }
 
 export function makeTable(t: Array<Col>, depth: number, { header, finalCols }: Table) {
@@ -46,7 +46,7 @@ function cols(...c: Array<Col>) {
 function getGridView<T>() {
 	const gv = reactive({ data: initializableList() }) as GridView<T>
 	gv.init = (...d: Array<T>) => {
-		gv.data.init(...d)
+		gv.data.init(...d.map((item, i) => ({ ...item, _status: 'N' as const, _origin: i })))
 	}
 	return gv
 }

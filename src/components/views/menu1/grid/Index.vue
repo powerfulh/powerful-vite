@@ -40,8 +40,12 @@ function toggleAdditionalCol() {
 
 <template>
 	<main>
+		<h1>반응형 헤더와 데이타</h1>
 		<button @click="insertTestData">Data</button>
 		<button @click="toggleAdditionalCol">Col</button>
+		<PowerfulGrid :cols="cols" :grid-view="gridView" readonly />
+
+		<h1>편집 가능한 데이타</h1>
 		<PowerfulGrid :cols="cols" :grid-view="gridView" />
 	</main>
 </template>
