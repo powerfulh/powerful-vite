@@ -8,6 +8,7 @@ const { cols, gridView } = getGrid(
 	},
 	{
 		name: 'price',
+		type: 'number',
 	},
 	{
 		name: 'brand',

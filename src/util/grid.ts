@@ -9,6 +9,7 @@ type FinalField<T extends Array<Col>> = {
 export interface Col {
 	name: string // data key
 	label?: string // 없으면 name
+	type?: 'text' | 'number'
 	child?: Array<Col>
 }
 interface DefinedCol extends Col {

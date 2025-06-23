@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { numberFormat } from '@/util'
 import { Col, GridView, makeTable, Table } from '@/util/grid'
 import { computed } from 'vue'
 
@@ -32,8 +33,9 @@ const table = computed(() => {
 			<tr v-for="(item, i) in gridView.data" :key="i">
 				<td v-if="readonly != true">{{ item._status }}</td>
 				<td v-for="(td, ii) in table.finalCols" :key="ii" :class="`col-${td.name}`">
-					<template v-if="readonly">{{ item[td.name] }}</template>
-					<input v-else v-model="item[td.name]" type="text" @input="gridView.set(item)" />
+					<template v-if="readonly">{{ numberFormat(item[td.name]) }}</template>
+					<!-- 현재는 타입이 인풋 타입에 호환되는 종류만 있지만 후에 추가 시 변경의 여지가 있음 250623 -->
+					<input v-else v-model="item[td.name]" :type="td.type || 'text'" @input="gridView.set(item)" />
 				</td>
 			</tr>
 		</tbody>
