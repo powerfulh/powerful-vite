@@ -1,0 +1,7 @@
+{
+	"Test1": {
+		"type": "get",
+		"url": "https://official-joke-api.appspot.com/random_joke",
+		"res": "Joke"
+	}
+}

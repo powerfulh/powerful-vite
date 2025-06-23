@@ -1,7 +1,7 @@
 <script setup>
 import { computed, isProxy, provide, reactive, toRaw } from 'vue'
 import { RouterView, useRoute, useRouter } from 'vue-router'
-import api from '@/util/api'
+import api from '@/api'
 import TopHeader from './components/app/TopHeader.vue'
 
 const router = useRouter()
