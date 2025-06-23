@@ -31,7 +31,10 @@ const table = computed(() => {
 		<tbody>
 			<tr v-for="(item, i) in gridView.data" :key="i">
 				<td v-if="readonly != true">{{ item._status }}</td>
-				<td v-for="(td, ii) in table.finalCols" :key="ii" :class="`col-${td.name}`">{{ item[td.name] }}</td>
+				<td v-for="(td, ii) in table.finalCols" :key="ii" :class="`col-${td.name}`">
+					<template v-if="readonly">{{ item[td.name] }}</template>
+					<input v-else v-model="item[td.name]" type="text" />
+				</td>
 			</tr>
 		</tbody>
 	</table>

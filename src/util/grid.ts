@@ -25,6 +25,7 @@ interface Row {
 export interface GridView<T> {
 	init: (...d: Array<T>) => void
 	data: Initializable<T & Row>
+	// set: (i: number, name: string, value: any) => void
 }
 
 export function makeTable(t: Array<Col>, depth: number, { header, finalCols }: Table) {
@@ -48,6 +49,9 @@ function getGridView<T>() {
 	gv.init = (...d: Array<T>) => {
 		gv.data.init(...d.map((item, i) => ({ ...item, _status: 'N' as const, _origin: i })))
 	}
+	// gv.set = (i, n, v) => {
+	// 	gv.data[i][n] = v
+	// }
 	return gv
 }
 export function getGrid<const T extends Array<Col>>(...c: T) {
