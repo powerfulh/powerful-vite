@@ -33,7 +33,7 @@ const table = computed(() => {
 				<td v-if="readonly != true">{{ item._status }}</td>
 				<td v-for="(td, ii) in table.finalCols" :key="ii" :class="`col-${td.name}`">
 					<template v-if="readonly">{{ item[td.name] }}</template>
-					<input v-else v-model="item[td.name]" type="text" />
+					<input v-else v-model="item[td.name]" type="text" @input="gridView.set(item)" />
 				</td>
 			</tr>
 		</tbody>

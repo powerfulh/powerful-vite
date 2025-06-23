@@ -25,7 +25,8 @@ interface Row {
 export interface GridView<T> {
 	init: (...d: Array<T>) => void
 	data: Initializable<T & Row>
-	// set: (i: number, name: string, value: any) => void
+	src: Array<T>
+	set: (target: T & Row) => void
 }
 
 export function makeTable(t: Array<Col>, depth: number, { header, finalCols }: Table) {
@@ -48,10 +49,13 @@ function getGridView<T>() {
 	const gv = reactive({ data: initializableList() }) as GridView<T>
 	gv.init = (...d: Array<T>) => {
 		gv.data.init(...d.map((item, i) => ({ ...item, _status: 'N' as const, _origin: i })))
+		gv.src = d
 	}
-	// gv.set = (i, n, v) => {
-	// 	gv.data[i][n] = v
-	// }
+	gv.set = t => {
+		if (['C', 'D'].includes(t._status)) return
+		const srcRow = gv.src[t._origin]
+		t._status = Object.keys(srcRow).find(item => srcRow[item] != t[item]) ? 'U' : 'N'
+	}
 	return gv
 }
 export function getGrid<const T extends Array<Col>>(...c: T) {
