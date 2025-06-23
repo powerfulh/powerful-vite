@@ -20,3 +20,21 @@
 				- Index.vue `진입점 (메뉴 루트 컴포넌트)`
 				- Child.vue...? `해당 화면에서만 쓰는 하위 컴포넌트 (없으면 Index 만 있는 구조)`
 	- {Common...}.vue? `핵심 기능은 아니지만 여러 화면에서 자주 사용되는 공통 컴포넌트`
+
+## 권장 스니펫
+```json
+{
+	"bnTemp": {
+		"prefix": "vtemp",
+		"body": [
+			"<script setup lang=\"ts\">",
+			"$2",
+			"</script>",
+			"",
+			"<template>",
+			"\t$1",
+			"</template>",
+		]
+	},
+}
+```
