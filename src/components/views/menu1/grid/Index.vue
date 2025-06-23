@@ -48,5 +48,7 @@ function toggleAdditionalCol() {
 
 		<h1>편집 가능한 데이타</h1>
 		<PowerfulGrid :cols="cols" :grid-view="gridView" />
+
+		<h1>복층 헤더 데이타 todo</h1>
 	</main>
 </template>
