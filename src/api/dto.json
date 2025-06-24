@@ -1,7 +1,0 @@
-{
-	"Joke": {
-		"activity": "string",
-		"availability": "number",
-		"type": "string"
-	}
-}

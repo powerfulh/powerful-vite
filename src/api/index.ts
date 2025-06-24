@@ -4,6 +4,7 @@ import axios, { AxiosRequestConfig } from 'axios'
 import store from './store'
 
 type Oid = keyof typeof apis.apis
+type SuccessCallback<T extends Oid> = Dto[(typeof apis.apis)[T]['res']]
 
 interface ApiOption {
 	loading?: boolean
@@ -11,7 +12,7 @@ interface ApiOption {
 
 let l: Loaded
 const p = {}
-let sc
+let sc: Function
 const launcher = {
 	load: <A extends Oid>(oid: A) => {
 		if (apis.apis[oid]) {
@@ -19,7 +20,7 @@ const launcher = {
 			return {
 				fire,
 				setParameter,
-				setWhenSuccess,
+				setWhenSuccess: setWhenSuccess<SuccessCallback<A>>,
 			}
 		} else globalMode.warn(`API ${oid} does not exists`)
 	},
@@ -75,7 +76,7 @@ function setParameter<T>(p: Ref<T>) {
 		setWhenSuccess,
 	}
 }
-function setWhenSuccess(c) {
+function setWhenSuccess<R>(c: (res: R) => any) {
 	sc = c
 	return {
 		fire,

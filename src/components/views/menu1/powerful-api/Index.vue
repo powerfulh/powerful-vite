@@ -7,7 +7,7 @@ const api = injectApi()
 const v = ref({})
 
 function test1() {
-	api.load('Test1')
+	api.load('Test_Noparam_Res')
 		.setWhenSuccess(res => (v.value = res))
 		.fire()
 }
