@@ -29,6 +29,13 @@ function test4(postId: string) {
 		.setWhenSuccess(res => (v.value = res[0]))
 		.fire()
 }
+function testPath() {
+	p.value.id = '1'
+	api.load('Test_pathParam_res')
+		.setParameter(p)
+		.setWhenSuccess(res => (v.value = res))
+		.fire()
+}
 </script>
 
 <template>
@@ -39,6 +46,7 @@ function test4(postId: string) {
 		<button @click="test3">Test 3</button>
 		<button @click="test4('3')">Test 4</button>
 		<button @click="test4('2')">Test 5</button>
+		<button @click="testPath">Test 6</button>
 		{{ v }}
 	</main>
 </template>

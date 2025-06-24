@@ -44,22 +44,26 @@ function callAxios(c: AxiosRequestConfig, o: ApiOption) {
 function fire(option: ApiOption = { loading: true }) {
 	if (option.loading === undefined) option.loading = true // 명시적으로 주지 않으면 기본적으로 로딩 표현
 	const g = ['get', 'GET'].includes(l.type)
+	const pathParam = l.param.filter(item => item.path)
+	const finalUrl = pathParam.length ? pathParam.reduce((r, item) => r.replace(`{${item.name}}`, p[item.name]), l.url) : l.url
 	const c: AxiosRequestConfig = {
 		method: l.type,
-		url: l.url,
+		url: finalUrl,
 		[g ? 'params' : 'data']: l.param
-			? l.param.reduce(
-					(r, item) =>
-						Object.assign(
-							r,
-							Object.prototype.hasOwnProperty.call(p, item.name)
-								? {
-										[item.name]: p[item.name],
-									}
-								: {},
-						),
-					{},
-				)
+			? l.param
+					.filter(item => item.path != true)
+					.reduce(
+						(r, item) =>
+							Object.assign(
+								r,
+								Object.prototype.hasOwnProperty.call(p, item.name)
+									? {
+											[item.name]: p[item.name],
+										}
+									: {},
+							),
+						{},
+					)
 			: {},
 	}
 	if (g) callAxios(c, option)

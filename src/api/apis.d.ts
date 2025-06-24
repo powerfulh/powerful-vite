@@ -6,5 +6,6 @@ interface Api<R = void> {
 	res?: R
 	param?: Array<{
 		name: string
+		path?: boolean
 	}>
 }

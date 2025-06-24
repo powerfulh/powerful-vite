@@ -17,5 +17,15 @@ export default {
 				name: 'postId',
 			},
 		],
-	} as Api<Array<Comment>>,
+	} as Api<Array<Comment1>>,
+	Test_pathParam_res: {
+		type: 'get',
+		url: 'https://jsonplaceholder.typicode.com/posts/{id}',
+		param: [
+			{
+				name: 'id',
+				path: true,
+			},
+		],
+	} as Api<Posts>,
 }
