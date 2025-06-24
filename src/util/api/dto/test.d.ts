@@ -3,3 +3,8 @@ interface Placeholder {
 	title: string
 	completed: boolean
 }
+interface Comment {
+	id: number
+	name: string
+	email: string
+}

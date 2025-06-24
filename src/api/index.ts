@@ -20,7 +20,7 @@ const launcher = {
 			l = operation[oid]
 			return {
 				fire,
-				setParameter,
+				setParameter: setParameter<SuccessCallback<A>>,
 				setWhenSuccess: setWhenSuccess<SuccessCallback<A>>,
 			}
 		} else globalMode.warn(`API ${oid} does not exists`)
@@ -48,33 +48,35 @@ function fire(option: ApiOption = { loading: true }) {
 		method: l.type,
 		url: l.url,
 		[g ? 'params' : 'data']: l.param
-			? l.param.reduce((r, item) =>
-					Object.assign(
-						r,
-						Object.prototype.hasOwnProperty.call(p, item.name)
-							? {
-									[item.name]: p[item.name],
-								}
-							: {},
-					),
+			? l.param.reduce(
+					(r, item) =>
+						Object.assign(
+							r,
+							Object.prototype.hasOwnProperty.call(p, item.name)
+								? {
+										[item.name]: p[item.name],
+									}
+								: {},
+						),
+					{},
 				)
 			: {},
 	}
 	if (g) callAxios(c, option)
 	// else todo
 }
-function setParameter<T>(p: Ref<T>) {
-	const urp = unref(p)
+function setParameter<T>(param: Ref<{}>) {
+	const urp = unref(param)
 	Object.assign(
 		p,
 		Object.keys(urp).reduce((r, item) => {
 			// 내부 속성이 또 ref 인 경우가 있다면 속성마다 unref 를 해줘야 한다
-			return Object.assign(r, { [item]: p[item] })
+			return Object.assign(r, { [item]: urp[item] })
 		}, {}),
 	)
 	return {
 		fire,
-		setWhenSuccess,
+		setWhenSuccess: setWhenSuccess<T>,
 	}
 }
 function setWhenSuccess<R>(c: (res: R) => any) {
