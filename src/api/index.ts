@@ -1,22 +1,23 @@
 import { inject, Ref, unref } from 'vue'
-import apis, { Loaded } from './apis'
 import axios, { AxiosRequestConfig } from 'axios'
 import store from './store'
+import operation from '@/api/operation'
+import { Api } from './apis'
 
-type Oid = keyof typeof apis.apis
-type SuccessCallback<T extends Oid> = Dto[(typeof apis.apis)[T]['res']]
+type Oid = keyof typeof operation
+type SuccessCallback<T extends Oid> = (typeof operation)[T]['res']
 
 interface ApiOption {
 	loading?: boolean
 }
 
-let l: Loaded
+let l: Api<any>
 const p = {}
 let sc: Function
 const launcher = {
 	load: <A extends Oid>(oid: A) => {
-		if (apis.apis[oid]) {
-			l = apis.apis[oid]
+		if (operation[oid]) {
+			l = operation[oid]
 			return {
 				fire,
 				setParameter,
