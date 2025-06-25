@@ -1,11 +1,13 @@
 <script setup lang="ts">
-import { injectApi } from 'powerful-api-vue3'
+import { getApiStore, injectApi } from 'powerful-api-vue3'
 import { ref } from 'vue'
 
 const api = injectApi()
+const apiStore = getApiStore()
 
 const v = ref({})
 const p = ref({} as any)
+const v2 = ref(0)
 
 function test1() {
 	api.load('Test_Noparam_Res')
@@ -15,6 +17,7 @@ function test1() {
 function test2() {
 	api.load('Test_Noparam_Res2')
 		.setWhenSuccess(res => (v.value = res))
+		.setWhenFinally(() => v2.value++)
 		.fire()
 }
 function test3() {
@@ -48,5 +51,7 @@ function testPath() {
 		<button @click="test4('2')">Test 5</button>
 		<button @click="testPath">Test 6</button>
 		{{ v }}
+		<template v-if="apiStore.loadingStack">로딩중~~</template>
+		{{ v2 }}
 	</main>
 </template>
