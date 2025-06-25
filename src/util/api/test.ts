@@ -1,14 +1,14 @@
-import { Api } from '@/api/apis'
+import { ApiOperation } from 'powerful-api-vue3/dist/apis'
 
 export default {
 	Test_Noparam_Res2: {
 		type: 'GET',
 		url: 'https://jsonplaceholder.typicode.com/todos/2',
-	} as Api<Placeholder>,
+	} as ApiOperation<Placeholder>,
 	Test_Noparam_Nores: {
 		type: 'GET',
 		url: 'https://jsonplaceholder.typicode.com/todos/1',
-	} as Api,
+	} as ApiOperation,
 	Test_param_res: {
 		type: 'get',
 		url: 'https://jsonplaceholder.typicode.com/comments',
@@ -17,7 +17,7 @@ export default {
 				name: 'postId',
 			},
 		],
-	} as Api<Array<Comment1>>,
+	} as ApiOperation<Array<Comment1>>,
 	Test_pathParam_res: {
 		type: 'get',
 		url: 'https://jsonplaceholder.typicode.com/posts/{id}',
@@ -27,5 +27,5 @@ export default {
 				path: true,
 			},
 		],
-	} as Api<Posts>,
+	} as ApiOperation<Posts>,
 }

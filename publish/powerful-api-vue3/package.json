@@ -1,0 +1,23 @@
+{
+	"name": "powerful-api-vue3",
+	"version": "1.0.1",
+	"description": "강력한 JSON 상하차",
+	"keywords": ["vue3", "api", "dto", "axios"],
+	"bugs": {
+		"email": "hanhoon12@naver.com"
+	},
+	"license": "MIT",
+	"author": {
+		"name": "한훈"
+	},
+	"main": "dist/powerful-api-vue3.ts",
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/powerfulh/powerful-vite"
+	},
+	"peerDependencies": {
+		"vue": "^3.4.29",
+		"pinia": "^2.1.7",
+		"axios": "^1.7.2"
+	}
+}

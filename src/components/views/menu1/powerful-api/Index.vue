@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { injectApi } from '@/api'
+import { injectApi } from 'powerful-api-vue3'
 import { ref } from 'vue'
 
 const api = injectApi()
