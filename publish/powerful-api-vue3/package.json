@@ -1,6 +1,6 @@
 {
 	"name": "powerful-api-vue3",
-	"version": "1.0.5",
+	"version": "1.0.6",
 	"description": "강력한 JSON 상하차",
 	"keywords": ["vue3", "api", "dto", "axios"],
 	"bugs": {
@@ -17,7 +17,7 @@
 	},
 	"peerDependencies": {
 		"vue": "^3.4.29",
-		"pinia": "^2.1.7",
+		"pinia": ">=2.1.7",
 		"axios": "^1.7.2"
 	}
 }
