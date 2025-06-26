@@ -1,6 +1,6 @@
 {
 	"name": "powerful-api-vue3",
-	"version": "1.0.4",
+	"version": "1.0.5",
 	"description": "강력한 JSON 상하차",
 	"keywords": ["vue3", "api", "dto", "axios"],
 	"bugs": {
@@ -10,7 +10,7 @@
 	"author": {
 		"name": "한훈"
 	},
-	"main": "dist/powerful-api-vue3.ts",
+	"main": "npmdist/powerful-api-vue3.ts",
 	"repository": {
 		"type": "git",
 		"url": "https://github.com/powerfulh/powerful-vite"
