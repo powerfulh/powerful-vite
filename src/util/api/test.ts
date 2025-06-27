@@ -1,4 +1,4 @@
-import { ApiOperation } from 'powerful-api-vue3/dist/apis'
+import { ApiOperation } from 'powerful-api-vue3/npmdist/apis'
 
 export default {
 	Test_Noparam_Res2: {
@@ -28,4 +28,12 @@ export default {
 			},
 		],
 	} as ApiOperation<Posts>,
+	blind100UsingGET: {
+		type: 'get',
+		url: 'http://localhost:8000/api/curtain',
+	} as ApiOperation<Array<Curtain>>,
+	Test_cloud: {
+		type: 'get',
+		url: 'https://port-0-powerful-spring-boot-5o1j2llh1wq9rp.sel4.cloudtype.app/api/curtain',
+	} as ApiOperation<Array<Curtain>>,
 }

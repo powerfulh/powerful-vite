@@ -13,3 +13,11 @@ interface Posts {
 	title: string
 	body: string
 }
+interface Curtain {
+	nn: string
+	b: string
+	t: string
+	d: string
+	cn: string
+	cp: string
+}
