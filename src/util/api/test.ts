@@ -28,10 +28,11 @@ export default {
 			},
 		],
 	} as ApiOperation<Posts>,
-	blind100UsingGET: {
-		type: 'get',
-		url: 'http://localhost:8000/api/curtain',
-	} as ApiOperation<Array<Curtain>>,
+	postTest: {
+		type: 'post',
+		url: 'https://port-0-powerful-spring-boot-5o1j2llh1wq9rp.sel4.cloudtype.app/powerful/authenticate',
+		param: [{ name: 'id' }, { name: 'pw' }],
+	} as ApiOperation<boolean>,
 	Test_cloud: {
 		type: 'get',
 		url: 'https://port-0-powerful-spring-boot-5o1j2llh1wq9rp.sel4.cloudtype.app/api/curtain',

@@ -39,10 +39,11 @@ function testPath() {
 		.setWhenSuccess(res => (v.value = res))
 		.fire()
 }
-function testCors() {
-	api.load('blind100UsingGET')
+function testPost() {
+	api.load('postTest')
+		.setParameter(ref({ id: '1', pw: '1' }))
 		.setWhenSuccess(res => (v.value = res))
-		.fire()
+		.fire({ noConfirm: true, loading: true })
 }
 function testCloud() {
 	api.load('Test_cloud')
@@ -60,7 +61,7 @@ function testCloud() {
 		<button @click="test4('3')">Test 4</button>
 		<button @click="test4('2')">Test 5</button>
 		<button @click="testPath">Test 6</button>
-		<button @click="testCors">Test cors</button>
+		<button @click="testPost">testPost</button>
 		<button @click="testCloud">Test cloud</button>
 		{{ v }}
 		<template v-if="apiStore.loadingStack">로딩중~~</template>
