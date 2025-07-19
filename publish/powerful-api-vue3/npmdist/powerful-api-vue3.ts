@@ -9,6 +9,7 @@ type SuccessCallback<T extends Oid> = (typeof operation)[T]['res']
 
 interface ApiOption {
 	loading?: boolean
+	noConfirm?: boolean
 }
 
 let l: ApiOperation<any>
@@ -71,7 +72,7 @@ function fire(option: ApiOption = { loading: true }) {
 					)
 			: {},
 	}
-	if (g) callAxios(c, option)
+	if (g || option.noConfirm) callAxios(c, option)
 	// else todo
 }
 function setParameter<T>(param: Ref<{}>) {
