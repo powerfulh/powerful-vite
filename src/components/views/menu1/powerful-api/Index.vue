@@ -43,6 +43,7 @@ function testPost() {
 	api.load('postTest')
 		.setParameter(ref({ id: '1', pw: '1' }))
 		.setWhenSuccess(res => (v.value = res))
+		.setWhenError(e => (v.value = e))
 		.fire({ noConfirm: true, loading: true })
 }
 function testCloud() {
