@@ -1,5 +1,5 @@
 import { inject, Ref, unref } from 'vue'
-import axios, { AxiosRequestConfig } from 'axios'
+import axios, { AxiosError, AxiosRequestConfig } from 'axios'
 import store from './store'
 import operation from '@/api/operation'
 import { ApiOperation } from './apis'
@@ -15,6 +15,7 @@ interface ApiOption {
 let l: ApiOperation<any>
 const p = {}
 let sc: Function
+let ec: Function
 let fc: Function
 const launcher = {
 	load: <A extends Oid>(oid: A) => {
@@ -23,6 +24,7 @@ const launcher = {
 			return {
 				setParameter: setParameter<SuccessCallback<A>>,
 				setWhenSuccess: setWhenSuccess<SuccessCallback<A>>,
+				setWhenError,
 				setWhenFinally,
 				fire,
 			}
@@ -36,7 +38,11 @@ function callAxios(c: AxiosRequestConfig, o: ApiOption) {
 	if (o.loading) apiStore.loadingStack++
 	const loadedCallback = sc
 	if (loadedCallback) call.then(res => loadedCallback(res.data))
-	// catch todo
+	const loaderErrorCallback = ec
+	call.catch((err: AxiosError) => {
+		if (loaderErrorCallback) loaderErrorCallback(err)
+		else globalMode.err(err.message)
+	})
 	const loadedFinallyCallback = fc
 	call.finally(() => {
 		if (o.loading && apiStore.loadingStack > 0) apiStore.loadingStack--
@@ -45,6 +51,7 @@ function callAxios(c: AxiosRequestConfig, o: ApiOption) {
 	l = null
 	Object.keys(p).forEach(item => delete p[item])
 	sc = null
+	ec = null
 	fc = null
 }
 function fire(option: ApiOption = { loading: true }) {
@@ -86,12 +93,21 @@ function setParameter<T>(param: Ref<{}>) {
 	)
 	return {
 		setWhenSuccess: setWhenSuccess<T>,
+		setWhenError,
 		setWhenFinally,
 		fire,
 	}
 }
 function setWhenSuccess<R>(c: (res: R) => any) {
 	sc = c
+	return {
+		setWhenError,
+		setWhenFinally,
+		fire,
+	}
+}
+function setWhenError(c: (e: AxiosError) => void) {
+	ec = c
 	return {
 		setWhenFinally,
 		fire,
