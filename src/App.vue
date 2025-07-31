@@ -3,6 +3,7 @@ import { computed, isProxy, provide, reactive, toRaw } from 'vue'
 import { RouterView, useRoute, useRouter } from 'vue-router'
 import TopHeader from './components/app/TopHeader.vue'
 import api from 'powerful-api-vue3'
+// import api from '../publish/powerful-api-vue3/npmdist/powerful-api-vue3'
 
 const router = useRouter()
 const route = useRoute()

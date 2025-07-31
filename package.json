@@ -17,7 +17,7 @@
     "dayjs": "^1.11.11",
     "numeral-es6": "^1.0.0",
     "pinia": "^2.1.7",
-    "powerful-api-vue3": "^1.0.8",
+    "powerful-api-vue3": "^1.1.0",
     "powerful-select": "^1.0.0",
     "sass": "^1.77.6",
     "typescript-eslint": "^7.15.0",

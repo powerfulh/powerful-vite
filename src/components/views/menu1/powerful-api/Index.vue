@@ -8,11 +8,13 @@ const apiStore = getApiStore()
 const v = ref({})
 const p = ref({} as any)
 const v2 = ref(0)
+const anyParam = ref('')
 
 function test1() {
-	api.load('Test_Noparam_Res')
+	api.load('setCookieTest')
+		.setParameter(ref({ id: 'test', pw: anyParam.value }))
 		.setWhenSuccess(res => (v.value = res))
-		.fire()
+		.fire({ credentials: true })
 }
 function test2() {
 	api.load('Test_Noparam_Res2')
@@ -44,7 +46,7 @@ function testPost() {
 		.setParameter(ref({ id: '1', pw: '1' }))
 		.setWhenSuccess(res => (v.value = res))
 		.setWhenError(e => (v.value = e))
-		.fire({ noConfirm: true, loading: true })
+		.fire()
 }
 function testCloud() {
 	api.load('Test_cloud')
@@ -56,7 +58,8 @@ function testCloud() {
 <template>
 	<main>
 		<h1>Powerful API 예제</h1>
-		<button @click="test1">Test 1</button>
+		<input v-model="anyParam" placeholder="Any params" />
+		<button @click="test1">Cookie test</button>
 		<button @click="test2">Test 2</button>
 		<button @click="test3">Test 3</button>
 		<button @click="test4('3')">Test 4</button>

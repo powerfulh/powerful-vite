@@ -37,4 +37,9 @@ export default {
 		type: 'get',
 		url: 'https://port-0-powerful-spring-boot-5o1j2llh1wq9rp.sel4.cloudtype.app/api/curtain',
 	} as ApiOperation<Array<Curtain>>,
+	setCookieTest: {
+		type: 'post',
+		url: 'http://localhost:8080/authentication',
+		param: [{ name: 'id' }, { name: 'pw' }],
+	} as ApiOperation<boolean>,
 }
