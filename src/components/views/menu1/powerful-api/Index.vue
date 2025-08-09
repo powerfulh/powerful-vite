@@ -17,22 +17,26 @@ function test1() {
 		.fire({ credentials: true })
 }
 function test2() {
-	api.load('Test_Noparam_Res2')
+	api.load('getPowerfulApi')
 		.setWhenSuccess(res => (v.value = res))
+		.setWhenError(({ response }) => globalMode.info(response))
 		.setWhenFinally(() => v2.value++)
-		.fire()
+		.fire({ credentials: true })
 }
 function test3() {
-	api.load('Test_Noparam_Nores')
+	api.load('postPowerfulApi')
 		.setWhenSuccess(res => globalMode.info(res))
-		.fire()
+		.fire({ credentials: true })
 }
-function test4(postId: string) {
-	p.value.postId = postId
-	api.load('Test_param_res')
+function test4() {
+	p.value = {
+		name: 'test',
+		data: anyParam.value,
+	}
+	api.load('putPowerfulApi')
 		.setParameter(p)
 		.setWhenSuccess(res => (v.value = res[0]))
-		.fire()
+		.fire({ credentials: true })
 }
 function testPath() {
 	p.value.id = '1'
@@ -60,10 +64,9 @@ function testCloud() {
 		<h1>Powerful API 예제</h1>
 		<input v-model="anyParam" placeholder="Any params" />
 		<button @click="test1">Cookie test</button>
-		<button @click="test2">Test 2</button>
-		<button @click="test3">Test 3</button>
-		<button @click="test4('3')">Test 4</button>
-		<button @click="test4('2')">Test 5</button>
+		<button @click="test2">Get api with authentication</button>
+		<button @click="test3">Make my data</button>
+		<button @click="test4">Update my data</button>
 		<button @click="testPath">Test 6</button>
 		<button @click="testPost">testPost</button>
 		<button @click="testCloud">Test cloud</button>
