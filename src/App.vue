@@ -2,7 +2,8 @@
 import { computed, isProxy, provide, reactive, toRaw } from 'vue'
 import { RouterView, useRoute, useRouter } from 'vue-router'
 import TopHeader from './components/app/TopHeader.vue'
-import api from 'powerful-api-vue3'
+import api, { getApiStore } from 'powerful-api-vue3'
+// import { getApiStore } from '../publish/powerful-api-vue3/npmdist/powerful-api-vue3'
 // import api from '../publish/powerful-api-vue3/npmdist/powerful-api-vue3'
 
 const router = useRouter()
@@ -106,6 +107,7 @@ globalMode = d
 		}
 provide('api', api.getLauncher())
 provide('dcc', devCommandCenter)
+getApiStore().globalOption = { credentials: true }
 </script>
 
 <template>

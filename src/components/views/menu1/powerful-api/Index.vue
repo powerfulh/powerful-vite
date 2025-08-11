@@ -14,19 +14,19 @@ function test1() {
 	api.load('setCookieTest')
 		.setParameter(ref({ id: 'test', pw: anyParam.value }))
 		.setWhenSuccess(res => (v.value = res))
-		.fire({ credentials: true })
+		.fire()
 }
 function test2() {
 	api.load('getPowerfulApi')
 		.setWhenSuccess(res => (v.value = res))
 		.setWhenError(({ response }) => globalMode.info(response))
 		.setWhenFinally(() => v2.value++)
-		.fire({ credentials: true })
+		.fire()
 }
 function test3() {
 	api.load('postPowerfulApi')
 		.setWhenSuccess(res => globalMode.info(res))
-		.fire({ credentials: true })
+		.fire()
 }
 function test4() {
 	p.value = {
@@ -36,7 +36,7 @@ function test4() {
 	api.load('putPowerfulApi')
 		.setParameter(p)
 		.setWhenSuccess(res => (v.value = res[0]))
-		.fire({ credentials: true })
+		.fire()
 }
 function testPath() {
 	p.value.id = '1'
