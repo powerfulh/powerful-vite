@@ -7,7 +7,7 @@ import { ApiOperation } from './apis'
 type Oid = keyof typeof operation
 type SuccessCallback<T extends Oid> = (typeof operation)[T]['res']
 
-interface ApiOption {
+export interface ApiOption {
 	loading?: boolean
 	credentials?: boolean
 }
@@ -55,7 +55,9 @@ function callAxios(c: AxiosRequestConfig, o: ApiOption) {
 	fc = null
 }
 function fire(option: ApiOption = { loading: true }) {
-	if (option.loading === undefined) option.loading = true // 명시적으로 주지 않으면 기본적으로 로딩 표현
+	const apiStore = store()
+	const finalOption: ApiOption = { ...apiStore.globalOption, ...option }
+	if (finalOption.loading === undefined) finalOption.loading = true // 명시적으로 주지 않으면 기본적으로 로딩 표현
 	const g = ['get', 'GET'].includes(l.type)
 	const pathParam = l.param?.filter(item => item.path) || []
 	const finalUrl = pathParam.length ? pathParam.reduce((r, item) => r.replace(`{${item.name}}`, p[item.name]), l.url) : l.url
@@ -79,8 +81,8 @@ function fire(option: ApiOption = { loading: true }) {
 					)
 			: {},
 	}
-	if (option.credentials) c.withCredentials = true
-	callAxios(c, option)
+	if (finalOption.credentials) c.withCredentials = true
+	callAxios(c, finalOption)
 }
 function setParameter<T>(param: Ref<{}>) {
 	const urp = unref(param)

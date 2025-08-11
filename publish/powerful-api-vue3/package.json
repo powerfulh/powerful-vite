@@ -1,6 +1,6 @@
 {
 	"name": "powerful-api-vue3",
-	"version": "1.1.0",
+	"version": "1.1.1",
 	"description": "강력한 JSON 상하차",
 	"keywords": ["vue3", "api", "dto", "axios"],
 	"bugs": {
